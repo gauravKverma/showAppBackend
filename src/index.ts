@@ -1,5 +1,5 @@
-import axios from "axios";
 import express, { Request, Response, Application } from "express";
+const axios = require("axios")
 const cors = require("cors");
 const app: Application = express();
 const jwt = require("jsonwebtoken");
