@@ -24,7 +24,7 @@ const savedCred = [
 const PORT = process.env.PORT || 8000;
 
 app.get("/", (req: Request, res: Response): void => {
-  res.send("Hello Typescript with Node.js!");
+  res.send("Welcome");
 });
 
 app.post("/login", (req: Request, res: Response): void => {
