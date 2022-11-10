@@ -1,6 +1,6 @@
-import express, {Request,Response,Application} from "express";
+import express, { Request, Response, Application } from "express";
 // const express=require("express")
-const axios = require("axios")
+const axios = require("axios");
 // import axios from "axios";
 // import cors from "cors"
 const cors = require("cors");
@@ -10,10 +10,16 @@ const jwt = require("jsonwebtoken");
 
 app.use(cors({}));
 app.use(express.json());
-app.use((req,res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://show-app-123.netlify.app/')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-})
+app.use((req, res) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://show-app-123.netlify.app/"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+});
 const savedCred = [
   {
     email: "gauravverma004@gmail.com",
@@ -31,11 +37,11 @@ const savedCred = [
 
 const PORT = process.env.PORT || 8000;
 
-app.get("/", (req:Request, res:Response) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Welcome");
 });
 
-app.post("/login", (req:Request, res:Response) => {
+app.post("/login", (req: Request, res: Response) => {
   const data = req.body;
   console.log(data);
   let auth = false;
@@ -55,12 +61,14 @@ app.post("/login", (req:Request, res:Response) => {
   }
 });
 
-app.post("/search", async (req:Request, res:Response) => {
+app.post("/search", async (req: Request, res: Response) => {
   let { query } = req.body;
   let token = req.headers["authorization"];
   let verify = jwt.verify(token, "SECRETKEY");
   if (verify) {
-    let resp=await axios.get(`https://api.tvmaze.com/search/shows?q=${query}`);
+    let resp = await axios.get(
+      `https://api.tvmaze.com/search/shows?q=${query}`
+    );
     res.status(200).send(resp.data);
   } else {
     res.sendStatus(401);
