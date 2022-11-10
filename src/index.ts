@@ -1,7 +1,7 @@
 import express, { Request, Response, Application } from "express";
 // const express=require("express")
-const axios = require("axios");
-// import axios from "axios";
+// const axios = require("axios");
+import axios from "axios";
 // import cors from "cors"
 const cors = require("cors");
 // const app=express();
@@ -10,15 +10,16 @@ const jwt = require("jsonwebtoken");
 
 app.use(cors({}));
 app.use(express.json());
-app.use((req, res) => {
-  res.setHeader(
+app.use((req, res, next) => {
+  res.header(
     "Access-Control-Allow-Origin",
     "https://show-app-123.netlify.app/"
   );
-  res.setHeader(
+  res.header(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
   );
+  next();
 });
 const savedCred = [
   {
@@ -34,8 +35,6 @@ const savedCred = [
     password: "verma12345",
   },
 ];
-
-const PORT = process.env.PORT || 8000;
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome");
@@ -75,6 +74,6 @@ app.post("/search", async (req: Request, res: Response) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log(`server running`);
 });
