@@ -1,9 +1,11 @@
-// import express, , Application } from "express";
-const express=require("express")
+import express, {Request,Response,Application} from "express";
+// const express=require("express")
 const axios = require("axios")
+// import axios from "axios";
+// import cors from "cors"
 const cors = require("cors");
-const app=express();
-// const app: Application = express();
+// const app=express();
+const app: Application = express();
 const jwt = require("jsonwebtoken");
 
 app.use(cors());
@@ -25,11 +27,11 @@ const savedCred = [
 
 const PORT = process.env.PORT || 8000;
 
-app.get("/", (req:any, res:any) => {
+app.get("/", (req:Request, res:Response) => {
   res.send("Welcome");
 });
 
-app.post("/login", (req:any, res:any) => {
+app.post("/login", (req:Request, res:Response) => {
   const data = req.body;
   console.log(data);
   let auth = false;
@@ -49,7 +51,7 @@ app.post("/login", (req:any, res:any) => {
   }
 });
 
-app.post("/search", async (req:any, res:any) => {
+app.post("/search", async (req:Request, res:Response) => {
   let { query } = req.body;
   let token = req.headers["authorization"];
   let verify = jwt.verify(token, "SECRETKEY");
