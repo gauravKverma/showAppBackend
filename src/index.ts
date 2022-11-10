@@ -8,19 +8,23 @@ const cors = require("cors");
 const app: Application = express();
 const jwt = require("jsonwebtoken");
 
-app.use(cors());
+let corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+}
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "*"
-  );
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "*"
+//   );
+//   res.header(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+//   );
+//   next();
+// });
 const savedCred = [
   {
     email: "gauravverma004@gmail.com",
