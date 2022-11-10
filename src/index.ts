@@ -8,8 +8,12 @@ const cors = require("cors");
 const app: Application = express();
 const jwt = require("jsonwebtoken");
 
-app.use(cors());
+app.use(cors({}));
 app.use(express.json());
+app.use((req,res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://show-app-123.netlify.app/')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+})
 const savedCred = [
   {
     email: "gauravverma004@gmail.com",
